@@ -1,0 +1,14 @@
+.navbar {
+  .navbar-nav {
+    text-align: right;
+  }
+  .dropdown-menu {
+    left: 0px;
+    overflow: auto;
+  }
+  .dropdown {
+    button {
+      border-radius: 50%;
+    }
+  }
+}

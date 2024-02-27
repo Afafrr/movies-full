@@ -1,0 +1,29 @@
+@import "./variables.scss";
+@import "./auth/auth.scss";
+@import "./components/navbar.scss";
+
+#root {
+  padding: 0px !important;
+  margin: 0px !important;
+  min-height: 100vh;
+  max-width: 100vw;
+}
+
+/* USE BEM */
+/* w roocie uzyc --text-color : rgb(255, 0, 0) */
+/* potem */
+/* p {
+  color: var(--text-color);
+} */
+/* use clamp(min, preffered, max) */
+/* calc( ) */
+/* button: focus-within focus stays within the children*/
+/* 
+gird-template-columns:
+repeat(auto-fit, minmax(250px, 1fr))
+
+header :is(h1, a, .btn){
+  color:red
+}
+children of header ^^
+*/
