@@ -4,8 +4,8 @@ import "./styles/app.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Root } from "./routes/Root.tsx";
 import { ErrorPage } from "./components/ErrorPage.tsx";
-import { Register } from "./auth/register/Register.tsx";
-import { Login } from "./auth/login/Login.tsx";
+import { RegisterPage } from "./auth/register/RegisterPage.tsx";
+import { LoginPage } from "./auth/login/LoginPage.tsx";
 import { Navbar } from "./components/Navbar.tsx";
 const router = createBrowserRouter([
   {
@@ -15,11 +15,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/register",
-    element: <Register />,
+    element: <RegisterPage />,
   },
   {
     path: "/login",
-    element: <Login />,
+    element: <LoginPage />,
   },
 ]);
 

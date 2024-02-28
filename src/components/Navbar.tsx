@@ -1,9 +1,11 @@
+import { Dropdown } from "./Dropdown";
+
 export const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-sm bg-body-tertiary">
+    <nav className="navbar navbar-expand-sm bg-body-tertiary z-1">
       <div className="container-fluid">
         <a className="navbar-brand" href="/">
-          Navbar
+          MoviesApp
         </a>
         <button
           className="navbar-toggler"
@@ -29,33 +31,7 @@ export const Navbar = () => {
               </a>
             </li>
           </ul>
-          <div className="dropdown">
-            <button
-              className="btn btn-secondary"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              MA
-            </button>
-            <ul className="dropdown-menu dropdown-menu-end">
-              <li>
-                <a className="dropdown-item" href="#">
-                  Action
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Another action
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Something else here
-                </a>
-              </li>
-            </ul>
-          </div>
+          <Dropdown />
         </div>
       </div>
     </nav>

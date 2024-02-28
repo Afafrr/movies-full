@@ -1,14 +1,58 @@
-.navbar {
-  .navbar-nav {
-    text-align: right;
+@import "../../../node_modules/bootstrap/scss/bootstrap-grid.scss";
+
+.dropdown {
+  button {
+    display: none;
   }
-  .dropdown-menu {
-    left: 0px;
-    overflow: auto;
+}
+
+.dropdown-menu-custom {
+  display: block;
+  position: relative;
+  right: 0px;
+  margin: 5px;
+  background-color: var(--bgc-dropdown);
+  border-radius: 0%;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
+
+  li:hover {
+    background-color: var(--dropdown-buttons-hover);
+  }
+
+  a {
+    display: grid;
+    grid-template-columns: minmax(1.5rem, auto) 1fr;
+    align-items: center;
+    gap: 0.5rem;
+    width: 10rem;
+    height: 100%;
+    padding: 1rem 1.3rem;
+    color: var(--dropdown-buttons-color);
+
+    i {
+      padding: 0rem 0.5rem;
+    }
+  }
+}
+@include media-breakpoint-up(sm) {
   .dropdown {
     button {
-      border-radius: 50%;
+      display: block;
+      border-radius: 35%;
+      aspect-ratio: 1 / 1;
+      font-size: 1.3rem;
     }
+  }
+  .dropdown-menu-custom {
+    position: absolute;
+    border-radius: 2%;
+  }
+  .hidden {
+    display: none;
   }
 }

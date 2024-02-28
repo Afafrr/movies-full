@@ -1,5 +1,3 @@
-import React from "react";
-
-export const AuthError = (mess) => {
-  return <div className="form-err">Error: {mess}</div>;
+export const AuthError = ({ mess }: { mess: string }) => {
+  return <div className="alert bg-danger">{mess}</div>;
 };
