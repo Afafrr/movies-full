@@ -2,13 +2,14 @@ import { auth, googleProvider } from "../../config/firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithPopup,
-  signOut,
+  updateProfile,
 } from "firebase/auth";
 import { useState } from "react";
 import { db } from "../../config/firebase";
-import { getDocs, addDoc, collection } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import { AuthError } from "../AuthError";
 import { AuthSuccess } from "../AuthSuccess";
+import { Link } from "react-router-dom";
 
 const usersCollection = collection(db, "Users");
 const friendList = collection(db, "friendList");
@@ -20,16 +21,21 @@ export const RegisterPage = () => {
   const [error, setError] = useState({ state: false, message: "" });
   const [success, setSuccess] = useState(false);
 
-  const signIn = async () => {
+  const signIn = async (e) => {
+    e.preventDefault();
     setError({ ...error, state: false });
     setSuccess(false);
-
     try {
       await createUserWithEmailAndPassword(auth, email, password);
+
+
+      
+      //TODO: ADD CHECK IF USERNAME ALREADY EXISTS
       await addDoc(usersCollection, {
         username: username,
-        friendList: null,
       });
+
+      console.log(username);
       setEmail("");
       setUsername("");
       setPassword("");
@@ -44,17 +50,9 @@ export const RegisterPage = () => {
     try {
       await signInWithPopup(auth, googleProvider);
       setSuccess(true);
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
       setError({ state: true, message: err.message });
-    }
-  };
-
-  const logout = async () => {
-    try {
-      await signOut(auth);
-    } catch (err) {
-      console.error(err);
     }
   };
 
@@ -64,8 +62,7 @@ export const RegisterPage = () => {
       <form novalidate>
         <div className="form-floating">
           <input
-            // id="username"
-            id="validationCustom01"
+            id="username"
             type="text"
             placeholder="Username..."
             className="form-control border-3"
@@ -97,20 +94,27 @@ export const RegisterPage = () => {
           />
           <label htmlFor="password">Password</label>
         </div>
-        <button
-          type="submit"
-          onClick={signIn}
-          className="btn btn-outline-dark mt-3"
-        >
+        <button onClick={signIn} className="btn btn-outline-dark mt-3">
           Sign In
         </button>
       </form>
-      <button onClick={signInWithGoogle} className="btn btn-outline-dark">
-        Sign In With Google <i className="bi bi-google"></i>
+      <button
+        onClick={signInWithGoogle}
+        className="btn btn-outline-dark btn-google"
+      >
+        <i className="bi bi-google"></i> Sign In With Google
       </button>
       <div className="alert-wrapper">
         {error.message && <AuthError mess={error.message} />}
-        {success && <AuthSuccess />}
+        {success && (
+          <AuthSuccess mess="Your account has been created. Now log in!" />
+        )}
+      </div>
+      <div className="register-wrapper">
+        If you have an account log in!
+        <Link to="/login" className="btn btn-sm btn-outline-dark register-btn">
+          Log in
+        </Link>
       </div>
     </div>
   );
