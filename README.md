@@ -10,7 +10,9 @@
 Project is in progress...
 	
 ## Technologies
-
+* React
+* Firebase
+* Bootstrap
 
 ## Screenshots
 Regsiter form
