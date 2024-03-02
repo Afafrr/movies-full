@@ -14,10 +14,12 @@ Project is in progress...
 
 ## Screenshots
 Regsiter form
-<img width="602" alt="image" src="https://github.com/Afafrr/movies-full/assets/118637963/b530f3c3-abde-4d9f-9ec7-f3f6e211b9a7">
+
+<img width="700" alt="image" src="https://github.com/Afafrr/movies-full/assets/118637963/b530f3c3-abde-4d9f-9ec7-f3f6e211b9a7">
 
 Log in form
-<img width="716" alt="image" src="https://github.com/Afafrr/movies-full/assets/118637963/87a57bf4-7e83-48c6-ab64-4ad361441cfa">
+
+<img width="700" alt="image" src="https://github.com/Afafrr/movies-full/assets/118637963/87a57bf4-7e83-48c6-ab64-4ad361441cfa">
 
 	
 ## Setup
