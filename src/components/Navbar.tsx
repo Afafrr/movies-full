@@ -5,10 +5,10 @@ export const Navbar = () => {
     <nav className="navbar navbar-expand-sm bg-body-tertiary z-1">
       <div className="container-fluid">
         <a className="navbar-brand" href="/">
-          MoviesApp
+        movies-app
         </a>
         <button
-          className="navbar-toggler"
+          className="navbar-toggler "
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"
@@ -16,21 +16,10 @@ export const Navbar = () => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon"></span>
+          <i className="bi bi-person-circle"></i>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#">
-                Home
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Link
-              </a>
-            </li>
-          </ul>
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0"></ul>
           <Dropdown />
         </div>
       </div>
