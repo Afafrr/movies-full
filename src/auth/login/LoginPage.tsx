@@ -15,15 +15,16 @@ export const LoginPage = () => {
   const logIn = async (e) => {
     e.preventDefault();
 
-    setError({ ...error, state: false });
+    setError({ state: false, message: "" });
     setSuccess(false);
+    console.log(email);
+    console.log(password);
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      console.log(email);
+      setSuccess(true);
       setEmail("");
       setPassword("");
-      setSuccess(true);
     } catch (err: any) {
       console.error(err.message);
       setError({ state: true, message: err.message });
@@ -48,6 +49,7 @@ export const LoginPage = () => {
           <input
             id="email"
             type="email"
+            value={email}
             placeholder="Email..."
             className="form-control border-3"
             required
@@ -59,6 +61,7 @@ export const LoginPage = () => {
           <input
             id="password"
             type="password"
+            value={password}
             placeholder="Password..."
             className="form-control border-3"
             required
@@ -78,7 +81,11 @@ export const LoginPage = () => {
       </button>
       <div className="alert-wrapper">
         {error.message && <AuthError mess={error.message} />}
-        {success && <AuthSuccess mess="You are logged in!" />}
+        {success && (
+          <AuthSuccess
+            mess={`You've looged in as ${auth.currentUser.displayName}`}
+          />
+        )}
       </div>
       <div className="register-wrapper">
         If you dont have an account create it!

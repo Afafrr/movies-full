@@ -25,17 +25,20 @@ export const RegisterPage = () => {
     e.preventDefault();
     setError({ ...error, state: false });
     setSuccess(false);
+
     try {
       await createUserWithEmailAndPassword(auth, email, password);
 
-
-      
-      //TODO: ADD CHECK IF USERNAME ALREADY EXISTS
-      await addDoc(usersCollection, {
-        username: username,
-      });
-
-      console.log(username);
+      if (auth.currentUser) {
+        await updateProfile(auth.currentUser, { displayName: username });
+        console.log("Updated profile");
+        
+        //TODO: ADD CHECK IF USERNAME ALREADY EXISTS
+        await addDoc(usersCollection, {
+          userEmail: email,
+          username: username,
+        });
+      }
       setEmail("");
       setUsername("");
       setPassword("");
@@ -63,6 +66,7 @@ export const RegisterPage = () => {
         <div className="form-floating">
           <input
             id="username"
+            value={username}
             type="text"
             placeholder="Username..."
             className="form-control border-3"
@@ -76,6 +80,7 @@ export const RegisterPage = () => {
           <input
             id="email"
             type="email"
+            value={email}
             placeholder="Email..."
             className="form-control border-3"
             required
@@ -87,6 +92,7 @@ export const RegisterPage = () => {
           <input
             id="password"
             type="password"
+            value={password}
             placeholder="Password..."
             className="form-control border-3"
             required
