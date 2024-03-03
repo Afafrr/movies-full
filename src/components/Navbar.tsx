@@ -5,7 +5,7 @@ export const Navbar = () => {
     <nav className="navbar navbar-expand-sm bg-body-tertiary z-1">
       <div className="container-fluid">
         <a className="navbar-brand" href="/">
-        movies-app
+          movies-app
         </a>
         <button
           className="navbar-toggler "
