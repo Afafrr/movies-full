@@ -12,7 +12,7 @@ export const Friends = () => {
     e.preventDefault();
     try {
       if (searchVal) {
-        const accounts = await findAccountByName(searchVal);
+        const accounts = await findAccountsByName(searchVal);
         setAccountsList(accounts);
       }
     } catch (error) {
