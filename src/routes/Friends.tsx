@@ -5,8 +5,10 @@ type account = { username: string; userEmail: string };
 export const Friends = () => {
   const [searchVal, setSearchVal] = useState("");
   const [accountsList, setAccountsList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const search = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
     try {
       if (searchVal) {
@@ -15,6 +17,8 @@ export const Friends = () => {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -38,14 +42,13 @@ export const Friends = () => {
           {accountsList.map((account) => {
             return (
               <li key={account.username}>
-                <p href={`/accounts/${account.username}`}>
-                  {account.userEmail}
-                </p>
+                <p>{account.username}</p>
               </li>
             );
           })}
         </ul>
       </div>
+      {isLoading && <div>LOADING</div>}
     </div>
   );
 };

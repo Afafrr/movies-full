@@ -4144,6 +4144,11 @@
   font-size: 1rem;
 }
 
+.loading-bar .placeholder {
+  position: absolute;
+  width: 100%;
+}
+
 @media (min-width: 576px) {
   .auth-form {
     top: 45%;
