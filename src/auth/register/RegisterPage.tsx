@@ -1,46 +1,27 @@
-import { auth, googleProvider } from "../../config/firebase";
-import {
-  createUserWithEmailAndPassword,
-  signInWithPopup,
-  updateProfile,
-} from "firebase/auth";
+import { Link } from "react-router-dom";
 import { useState } from "react";
-import { db } from "../../config/firebase";
-import { addDoc, collection } from "firebase/firestore";
 import { AuthError } from "../AuthError";
 import { AuthSuccess } from "../AuthSuccess";
-import { Link } from "react-router-dom";
-
-const usersCollection = collection(db, "Users");
-const friendList = collection(db, "friendList");
+import { Register } from "../../services/register/authFirebase";
+import { Navigate } from "react-router-dom";
 
 export const RegisterPage = () => {
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState({ state: false, message: "" });
   const [success, setSuccess] = useState(false);
 
-  const signIn = async (e) => {
+  //create instance of the registration class
+  const register = new Register(email, password);
+  const signIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setError({ ...error, state: false });
     setSuccess(false);
-
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-
-      if (auth.currentUser) {
-        await updateProfile(auth.currentUser, { displayName: username });
-        console.log("Updated profile");
-        
-        //TODO: ADD CHECK IF USERNAME ALREADY EXISTS
-        await addDoc(usersCollection, {
-          userEmail: email,
-          username: username,
-        });
-      }
+      //create user in firebase auth
+      await register.registerWithEmailAndPassword();
+      //clear form fields
       setEmail("");
-      setUsername("");
       setPassword("");
       setSuccess(true);
     } catch (err: any) {
@@ -50,8 +31,12 @@ export const RegisterPage = () => {
   };
 
   const signInWithGoogle = async () => {
+    setError({ ...error, state: false });
+    setSuccess(false);
     try {
-      await signInWithPopup(auth, googleProvider);
+      //create user in firebase auth with google
+      await register.registerWithGoogle();
+
       setSuccess(true);
     } catch (err: any) {
       console.error(err);
@@ -62,20 +47,7 @@ export const RegisterPage = () => {
   return (
     <div className="auth-form ">
       <h2>Create your account.</h2>
-      <form novalidate>
-        <div className="form-floating">
-          <input
-            id="username"
-            value={username}
-            type="text"
-            placeholder="Username..."
-            className="form-control border-3"
-            required
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <label htmlFor="username">Username</label>
-          <div className="valid-feedback">Looks good!</div>
-        </div>
+      <form novalidate onSubmit={signIn}>
         <div className="form-floating">
           <input
             id="email"
@@ -100,20 +72,20 @@ export const RegisterPage = () => {
           />
           <label htmlFor="password">Password</label>
         </div>
-        <button onClick={signIn} className="btn btn-outline-dark mt-3">
+        <button type="submit" className="btn btn-dark btn-sign-in">
           Sign In
         </button>
       </form>
-      <button
-        onClick={signInWithGoogle}
-        className="btn btn-outline-dark btn-google"
-      >
+      <button onClick={signInWithGoogle} className="btn btn-dark btn-google">
         <i className="bi bi-google"></i> Sign In With Google
       </button>
       <div className="alert-wrapper">
-        {error.message && <AuthError mess={error.message} />}
+        {error.state && <AuthError mess={error.message} />}
         {success && (
-          <AuthSuccess mess="Your account has been created. Now log in!" />
+          <>
+            <AuthSuccess mess="Your account has been created." />
+            <Navigate to="/register/username"></Navigate>
+          </>
         )}
       </div>
       <div className="register-wrapper">

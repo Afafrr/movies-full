@@ -1,0 +1,19 @@
+.friends-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0.5rem;
+  form {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .accounts-list {
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}

@@ -1,12 +1,25 @@
 @import "./variables.scss";
 @import "./auth/auth.scss";
+@import "./auth/loggedInOutPopup.scss";
+@import "./auth/createUsername.scss";
 @import "./components/navbar.scss";
+@import "./routes/notLogged.scss";
+@import "./routes/notFound.scss";
+@import "./routes/friends.scss";
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
 #root {
   padding: 0px !important;
   margin: 0px !important;
-  min-height: 100vh;
+  height: 100%;
   max-width: 100vw;
+
+  display: flex;
+  flex-direction: column;
+}
+html,
+body {
+  height: 100vh;
 }
 a {
   text-decoration: none;

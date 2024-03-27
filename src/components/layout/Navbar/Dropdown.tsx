@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { auth } from "../config/firebase";
+import { auth } from "../../../services/config/firebase";
 import { signOut } from "firebase/auth";
 
 export const Dropdown = () => {
@@ -29,6 +29,8 @@ export const Dropdown = () => {
   const logout = async () => {
     try {
       await signOut(auth);
+      //sessionStorage is used to handle redirects after login and logout in RouterProviderAuth
+      sessionStorage.setItem("logged", "false");
     } catch (err: any) {
       console.error(err);
     }
@@ -42,17 +44,17 @@ export const Dropdown = () => {
       <div className={`dropdown-menu-custom ${visibility || "hidden"}`}>
         <ul>
           <li>
-            <a href="/account">
+            <a href="/dashboard/account">
               <i className="bi bi-person-circle"></i> Account
             </a>
           </li>
           <li>
-            <a href="/friends">
+            <a href="/dashboard/friends">
               <i className="bi bi-people-fill"></i> Friends
             </a>
           </li>
           <li>
-            <a onClick={logout}>
+            <a href="" onClick={logout}>
               <i className="bi bi-person-walking"></i> Logout
             </a>
           </li>

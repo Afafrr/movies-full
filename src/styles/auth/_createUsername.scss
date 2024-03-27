@@ -1,0 +1,17 @@
+.username-form {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  padding: 1rem;
+  width: 100%;
+  max-width: 400px;
+  transform: translate(-50%, -50%);
+
+  h2 {
+    margin: 2rem 0rem;
+  }
+  button {
+    width: 100%;
+    padding: 0.8rem;
+  }
+}

@@ -1,24 +1,23 @@
-import { auth, googleProvider } from "../../config/firebase";
+import { auth, googleProvider } from "../../services/config/firebase";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useState } from "react";
 import { AuthError } from "../AuthError";
 import { AuthSuccess } from "../AuthSuccess";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { UserService } from "../../services/register/userService";
 
 export const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState({ state: false, message: "" });
   const [success, setSuccess] = useState(false);
-  console.log(auth.currentUser);
+  const navigate = useNavigate();
 
-  const logIn = async (e) => {
+  const logIn = async (e: React.FormEvent) => {
     e.preventDefault();
-
     setError({ state: false, message: "" });
     setSuccess(false);
-    console.log(email);
-    console.log(password);
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
@@ -32,8 +31,16 @@ export const LoginPage = () => {
   };
 
   const logInWithGoogle = async () => {
+    //google doest not have sparate login and register methods
+    //so after the login there is a check if user has username set
     try {
-      await signInWithPopup(auth, googleProvider);
+      const user = await signInWithPopup(auth, googleProvider);
+      //if user does not have username redirect
+      const userService = new UserService();
+      const result = await userService.checkIfEmailHasUsername(user.user.email);
+      if (!result) {
+        return navigate("../register/username");
+      }
       setSuccess(true);
     } catch (err: any) {
       console.error(err);
@@ -42,9 +49,9 @@ export const LoginPage = () => {
   };
 
   return (
-    <div className="auth-form ">
+    <div className="auth-form">
       <h2>Log in to your account.</h2>
-      <form novalidate>
+      <form novalidate onSubmit={logIn}>
         <div className="form-floating">
           <input
             id="email"
@@ -69,7 +76,7 @@ export const LoginPage = () => {
           />
           <label htmlFor="password">Password</label>
         </div>
-        <button onClick={logIn} className="btn btn-outline-dark mt-3">
+        <button type="submit" className="btn btn-outline-dark mt-3">
           Log in
         </button>
       </form>
@@ -82,9 +89,12 @@ export const LoginPage = () => {
       <div className="alert-wrapper">
         {error.message && <AuthError mess={error.message} />}
         {success && (
-          <AuthSuccess
-            mess={`You've looged in as ${auth.currentUser.displayName}`}
-          />
+          <>
+            <AuthSuccess
+              mess={`You've looged in as ${auth.currentUser?.displayName}`}
+            />
+            <Navigate to={"/dashboard"}></Navigate>
+          </>
         )}
       </div>
       <div className="register-wrapper">
