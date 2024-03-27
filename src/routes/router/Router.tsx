@@ -14,7 +14,7 @@ import { ErrorPage } from "../../components/ErrorPage.tsx";
 import { CreateUsername } from "../../auth/register/CreateUsername.tsx";
 import { NotFound } from "./NotFound.tsx";
 import { DashboardRouter } from "./DashboardRouter.tsx";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const Router = () => {
   //dashboard has logic for redirecting unauth users
@@ -33,11 +33,16 @@ export const Router = () => {
   return <RouterProvider router={router} />;
 };
 
+export type IsLoadingContext = {
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
 export const Root = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   //root path is redirected to /dashboard
   const location = useLocation();
   const navigate = useNavigate();
-
   useEffect(() => {
     if (location.pathname === "/") {
       navigate("/dashboard");
@@ -46,8 +51,8 @@ export const Root = () => {
 
   return (
     <>
-      <Navbar />
-      <Outlet />
+      <Navbar isLoading={isLoading} />
+      <Outlet context={{ setIsLoading } satisfies ContextType} />
     </>
   );
 };

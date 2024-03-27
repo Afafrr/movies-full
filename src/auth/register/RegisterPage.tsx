@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import { useState } from "react";
 import { AuthError } from "../AuthError";
 import { AuthSuccess } from "../AuthSuccess";
@@ -11,12 +11,22 @@ export const RegisterPage = () => {
   const [error, setError] = useState({ state: false, message: "" });
   const [success, setSuccess] = useState(false);
 
+  const {
+    setIsLoading,
+  }: { setIsLoading: React.Dispatch<React.SetStateAction<boolean>> } =
+    useOutletContext();
+
+  const setStates = () => {
+    setError({ state: false, message: "" });
+    setSuccess(false);
+    setIsLoading(true);
+  };
+
   //create instance of the registration class
   const register = new Register(email, password);
   const signIn = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError({ ...error, state: false });
-    setSuccess(false);
+    setStates();
     try {
       //create user in firebase auth
       await register.registerWithEmailAndPassword();
@@ -27,20 +37,22 @@ export const RegisterPage = () => {
     } catch (err: any) {
       console.error(err.message);
       setError({ state: true, message: err.message });
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const signInWithGoogle = async () => {
-    setError({ ...error, state: false });
-    setSuccess(false);
+    setStates();
     try {
       //create user in firebase auth with google
       await register.registerWithGoogle();
-
       setSuccess(true);
     } catch (err: any) {
       console.error(err);
       setError({ state: true, message: err.message });
+    } finally {
+      setIsLoading(false);
     }
   };
 

@@ -4,15 +4,18 @@ import { Dashboard } from "../Dashboard.tsx";
 import { auth } from "../../services/config/firebase.ts";
 import { Friends } from "../Friends.tsx";
 import { LoggedOut } from "../../components/layout/Navbar/LoggedOut.tsx";
+import { useEffect } from "react";
 
 export const DashboardRouter = () => {
   const navigate = useNavigate();
   //every route after /dashboard is protected
-  auth.onAuthStateChanged((user) => {
-    if (!user) {
-      navigate("/login");
-    }
-  });
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (!user) {
+        navigate("/login");
+      }
+    });
+  }, []);
 
   return (
     <>

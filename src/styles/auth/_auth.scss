@@ -57,6 +57,13 @@
   font-size: 1rem;
 }
 
+.loading-bar {
+  .placeholder {
+    position: absolute;
+    width: 100%;
+  }
+}
+
 @include media-breakpoint-up(sm) {
   .auth-form {
     top: 45%;

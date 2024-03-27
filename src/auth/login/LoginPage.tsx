@@ -3,22 +3,29 @@ import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useState } from "react";
 import { AuthError } from "../AuthError";
 import { AuthSuccess } from "../AuthSuccess";
-import { Link, redirect } from "react-router-dom";
+import { Link, redirect, useOutletContext } from "react-router-dom";
 import { useNavigate, Navigate } from "react-router-dom";
 import { UserService } from "../../services/register/userService";
+import { IsLoadingContext } from "../../routes/router/Router";
 
 export const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState({ state: false, message: "" });
   const [success, setSuccess] = useState(false);
+  const { setIsLoading }: IsLoadingContext = useOutletContext();
+
   const navigate = useNavigate();
+
+  const setStates = () => {
+    setError({ state: false, message: "" });
+    setSuccess(false);
+    setIsLoading(true);
+  };
 
   const logIn = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError({ state: false, message: "" });
-    setSuccess(false);
-
+    setStates();
     try {
       await signInWithEmailAndPassword(auth, email, password);
       setSuccess(true);
@@ -27,10 +34,13 @@ export const LoginPage = () => {
     } catch (err: any) {
       console.error(err.message);
       setError({ state: true, message: err.message });
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const logInWithGoogle = async () => {
+    setStates();
     //google doest not have sparate login and register methods
     //so after the login there is a check if user has username set
     try {
@@ -45,6 +55,8 @@ export const LoginPage = () => {
     } catch (err: any) {
       console.error(err);
       setError({ state: true, message: err.message });
+    } finally {
+      setIsLoading(false);
     }
   };
 
