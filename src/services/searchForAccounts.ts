@@ -4,12 +4,9 @@ import {
   getDocs,
   orderBy,
   query,
-  startAfter,
   startAt,
-  where,
 } from "firebase/firestore";
 import { db } from "./config/firebase";
-import { orderByChild } from "firebase/database";
 
 export const findAccountByName = async (usernameQuery: string) => {
   const usersRef = collection(db, "Users");
