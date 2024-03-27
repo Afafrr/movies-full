@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { findAccountByName } from "../services/searchForAccounts";
+import { findAccountsByName } from "../services/searchForAccounts";
 type account = { username: string; userEmail: string };
 
 export const Friends = () => {

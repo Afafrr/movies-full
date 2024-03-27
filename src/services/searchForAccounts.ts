@@ -8,7 +8,7 @@ import {
 } from "firebase/firestore";
 import { db } from "./config/firebase";
 
-export const findAccountByName = async (usernameQuery: string) => {
+export const findAccountsByName = async (usernameQuery: string) => {
   const usersRef = collection(db, "Users");
   const trimmedLowerUsername = usernameQuery.trim().toLowerCase();
   const docArray: any = [];
