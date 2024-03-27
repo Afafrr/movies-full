@@ -59,15 +59,6 @@ export class UserService {
       } else {
         userExists = true;
       }
-
-      // querySnapshot.forEach((doc) => {
-      //   console.log(doc.data());
-      //   if (doc.data().username) {
-      //     userExists = true;
-      //   } else {
-      //     userExists = false;
-      //   }
-      // });
     } catch (error: any) {
       throw new Error(error.message);
     }
