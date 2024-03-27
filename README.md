@@ -1,30 +1,34 @@
-# React + TypeScript + Vite
+# movies-app
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Table of contents
+* [General info](#general-info)
+* [Technologies](#technologies)
+* [Screenshots](#screenshots)
+* [Setup](#setup)
 
-Currently, two official plugins are available:
+## General info
+Project is in progress...
+	
+## Technologies
+* React
+* Firebase
+* Bootstrap
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Screenshots
+Regsiter form
 
-## Expanding the ESLint configuration
+<img width="800" alt="image" src="https://github.com/Afafrr/movies-full/assets/118637963/ddbdda6a-0803-4ccf-8e41-13f225a15049">
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Log in form
 
-- Configure the top-level `parserOptions` property like this:
+<img width="800" alt="image" src="https://github.com/Afafrr/movies-full/assets/118637963/d6c0d770-b860-4ecc-a6d9-d95315376ccb">
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+	
+## Setup
+To run this project, install it locally using npm:
+
 ```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+$ cd ../lorem
+$ npm install
+$ npm start
+```
