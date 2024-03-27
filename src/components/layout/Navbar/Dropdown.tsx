@@ -1,9 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { auth } from "../../../services/config/firebase";
 import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 export const Dropdown = () => {
   const [visibility, setVisibility] = useState(false);
+  const navigate = useNavigate();
 
   const toggleVisibility = () => {
     setVisibility(!visibility);
@@ -31,6 +33,7 @@ export const Dropdown = () => {
       await signOut(auth);
       //sessionStorage is used to handle redirects after login and logout in RouterProviderAuth
       sessionStorage.setItem("logged", "false");
+      navigate('/notlogged')
     } catch (err: any) {
       console.error(err);
     }
