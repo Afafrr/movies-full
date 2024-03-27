@@ -4,7 +4,7 @@ import { useState } from "react";
 import { AuthError } from "../AuthError";
 import { AuthSuccess } from "../AuthSuccess";
 import { Link, redirect } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { UserService } from "../../services/register/userService";
 
 export const LoginPage = () => {
