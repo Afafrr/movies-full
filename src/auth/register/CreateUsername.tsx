@@ -37,6 +37,7 @@ export const CreateUsername = () => {
             value={username}
             placeholder="Username..."
             className="form-control border-3"
+            autoComplete="name"
             required
             onChange={(e) => setUsername(e.target.value)}
           />

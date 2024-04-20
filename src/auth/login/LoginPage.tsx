@@ -70,6 +70,7 @@ export const LoginPage = () => {
             type="email"
             value={email}
             placeholder="Email..."
+            autoComplete="email"
             className="form-control border-3"
             required
             onChange={(e) => setEmail(e.target.value)}

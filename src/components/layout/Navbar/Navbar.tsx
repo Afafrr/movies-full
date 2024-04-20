@@ -23,7 +23,9 @@ export const Navbar = ({ isLoading }: { isLoading: boolean }) => {
           <button
             onClick={() =>
               auth.onAuthStateChanged((user) => {
-                console.log("", user?.displayName);
+                console.log(user);
+
+                console.log(auth.currentUser);
               })
             }
           >
