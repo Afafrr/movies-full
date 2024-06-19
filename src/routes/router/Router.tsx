@@ -24,7 +24,6 @@ export const Router = () => {
         <Route path="login" element={<LoginPage />} />
         <Route path="register" element={<RegisterPage />} />
         <Route path="register/username" element={<CreateUsername />} />
-
         <Route path="dashboard/*" element={<DashboardRouter />} />
         <Route path="*" element={<NotFound />} />
       </Route>
@@ -39,7 +38,6 @@ export type IsLoadingContext = {
 
 export const Root = () => {
   const [isLoading, setIsLoading] = useState(false);
-
   //root path is redirected to /dashboard
   const location = useLocation();
   const navigate = useNavigate();
@@ -48,11 +46,11 @@ export const Root = () => {
       navigate("/dashboard");
     }
   }, []);
-
+        
   return (
     <>
       <Navbar isLoading={isLoading} />
-      <Outlet context={{ setIsLoading } satisfies ContextType} />
+      <Outlet context={{ setIsLoading }} />
     </>
   );
 };

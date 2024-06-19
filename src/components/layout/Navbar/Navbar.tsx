@@ -1,7 +1,30 @@
 import { Dropdown } from "./Dropdown";
 import { auth } from "../../../services/config/firebase";
+import { useLocation } from "react-router-dom";
+import { ReactNode } from "react";
 
 export const Navbar = ({ isLoading }: { isLoading: boolean }) => {
+  let { pathname } = useLocation();
+  let authLocation = true;
+  //display more navigation options if on logged
+  if (pathname === ("/login" || "/register" || "/register/username")) {
+    authLocation = false;
+  }
+
+  const navBtns: React.ReactNode = (
+    <div className="nav-btns-container">
+      <a className="btn" href="/dashboard/movies">
+        Popular movies
+      </a>
+      <a className="btn" href="">
+        movies
+      </a>
+      <a className="btn" href="">
+        movies
+      </a>
+    </div>
+  );
+
   return (
     <div>
       <nav className="navbar navbar-expand-sm bg-body-tertiary z-1">
@@ -20,21 +43,19 @@ export const Navbar = ({ isLoading }: { isLoading: boolean }) => {
           >
             <i className="bi bi-person-circle"></i>
           </button>
-          <button
-            onClick={() =>
-              auth.onAuthStateChanged((user) => {
-                console.log(user);
 
-                console.log(auth.currentUser);
-              })
-            }
-          >
-            CHECK
-          </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0"></ul>
-            <Dropdown />
-          </div>
+          {authLocation && (
+            <>
+              <div className="nav-Btns-wrapper">{navBtns}</div>
+              <div
+                className="collapse navbar-collapse"
+                id="navbarSupportedContent"
+              >
+                <ul className="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+                <Dropdown navBtns={navBtns} />
+              </div>
+            </>
+          )}
         </div>
       </nav>
       {isLoading && (

@@ -5,6 +5,9 @@
     display: none;
   }
 }
+.nav-Btns-wrapper {
+  display: none;
+}
 
 .dropdown-menu-custom {
   display: block;
@@ -15,6 +18,8 @@
   border-radius: 0%;
 
   ul {
+    display: flex;
+    flex-direction: column;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -44,8 +49,35 @@
   aspect-ratio: 1 / 1;
   font-size: 1.3rem;
 }
-
+@mixin nav-btns-pos {
+  position: absolute;
+  left: 0px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 @include media-breakpoint-up(sm) {
+  .nav-Btns-wrapper {
+    @include nav-btns-pos;
+  }
+  .navbar-brand {
+    z-index: 10;
+  }
+  .navbar {
+    .nav-btns-container {
+      @include nav-btns-pos;
+    }
+  }
+  .navbar-collapse {
+    ul {
+      display: flex;
+      justify-content: space-around;
+      .btn {
+        width: 100%;
+      }
+    }
+  }
   .dropdown {
     margin-right: 0.5rem;
     button {

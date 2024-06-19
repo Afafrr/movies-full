@@ -1,21 +1,23 @@
 import { useEffect, useState } from "react";
 import { auth } from "../services/config/firebase";
-import { onAuthStateChanged, getAuth } from "firebase/auth";
+import { getCurrentUser } from "../services/login/getCurrentUser";
 
 export const Account = () => {
-  const [username, setUsername] = useState<string | null | undefined>("");
-
+  const [email, setEmail] = useState("");
+  let userEmail;
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      setUsername(user?.displayName);
-      console.log(user);
+    auth.onAuthStateChanged((user) => {
+      userEmail = user.email;
+      console.log(userEmail);
+      setEmail(user?.email);
+      
     });
   }, []);
 
   return (
     <div>
-      {username}
-      AccountPage
+      <p>AccountPage</p>
+      {email}
     </div>
   );
 };

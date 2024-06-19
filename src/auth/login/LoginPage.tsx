@@ -3,7 +3,7 @@ import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useState } from "react";
 import { AuthError } from "../AuthError";
 import { AuthSuccess } from "../AuthSuccess";
-import { Link, redirect, useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import { useNavigate, Navigate } from "react-router-dom";
 import { UserService } from "../../services/register/userService";
 import { IsLoadingContext } from "../../routes/router/Router";
@@ -17,7 +17,7 @@ export const LoginPage = () => {
 
   const navigate = useNavigate();
 
-  const setStates = () => {
+  const resetStates = () => {
     setError({ state: false, message: "" });
     setSuccess(false);
     setIsLoading(true);
@@ -25,7 +25,7 @@ export const LoginPage = () => {
 
   const logIn = async (e: React.FormEvent) => {
     e.preventDefault();
-    setStates();
+    resetStates();
     try {
       await signInWithEmailAndPassword(auth, email, password);
       setSuccess(true);
@@ -40,8 +40,8 @@ export const LoginPage = () => {
   };
 
   const logInWithGoogle = async () => {
-    setStates();
-    //google doest not have sparate login and register methods
+    resetStates();
+    //google doest not have separate login and register methods
     //so after the login there is a check if user has username set
     try {
       const user = await signInWithPopup(auth, googleProvider);

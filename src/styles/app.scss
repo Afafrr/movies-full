@@ -3,9 +3,11 @@
 @import "./auth/loggedInOutPopup.scss";
 @import "./auth/createUsername.scss";
 @import "./components/navbar.scss";
+//routes
 @import "./routes/notLogged.scss";
 @import "./routes/notFound.scss";
 @import "./routes/friends.scss";
+@import "./routes/moviesPopular";
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
 
 #root {

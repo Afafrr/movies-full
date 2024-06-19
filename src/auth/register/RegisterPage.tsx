@@ -16,7 +16,7 @@ export const RegisterPage = () => {
   }: { setIsLoading: React.Dispatch<React.SetStateAction<boolean>> } =
     useOutletContext();
 
-  const setStates = () => {
+  const resetStates = () => {
     setError({ state: false, message: "" });
     setSuccess(false);
     setIsLoading(true);
@@ -26,7 +26,7 @@ export const RegisterPage = () => {
   const register = new Register(email, password);
   const signIn = async (e: React.FormEvent) => {
     e.preventDefault();
-    setStates();
+    resetStates();
     try {
       //create user in firebase auth
       await register.registerWithEmailAndPassword();
@@ -43,7 +43,7 @@ export const RegisterPage = () => {
   };
 
   const signInWithGoogle = async () => {
-    setStates();
+    resetStates();
     try {
       //create user in firebase auth with google
       await register.registerWithGoogle();

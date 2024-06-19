@@ -1,5 +1,7 @@
 //types
 import { account } from "./Friends";
+import { Spinner } from "../../components/Spinner";
+
 type props = {
   accountsList: account[];
   isLoading: boolean;
@@ -11,24 +13,20 @@ export const FriendsListComponent = ({
   isLoading,
   noResults,
 }: props) => {
-  const spinner = (
-    <div className="spinner-border" role="status">
-      <span className="sr-only"></span>
-    </div>
-  );
-
   const usersList = accountsList.map((account: account) => {
     return (
       <li key={account.username}>
         <p>{account.username}</p>
+        <button onClick={}>Add to friend list</button>
       </li>
     );
   });
 
-  const noResultsInfo = <p>Couldn't find such user</p>;
-  const listComponent = <ul>{noResults ? noResultsInfo : usersList}</ul>;
+  const listComponent = (
+    <ul>{noResults ? <p>Couldn't find such user</p> : usersList}</ul>
+  );
 
   return (
-    <div className="accounts-list">{isLoading ? spinner : listComponent}</div>
+    <div className="accounts-list">{isLoading ? Spinner : listComponent}</div>
   );
 };

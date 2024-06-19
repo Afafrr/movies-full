@@ -1,0 +1,26 @@
+.popular-movies {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.movie-list-el {
+  display: flex;
+  justify-content: start;
+  .image {
+    height: 8rem;
+    margin: 20px;
+  }
+  .info {
+    padding: 15px 0px;
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  .movie-list-el {
+    .image {
+      height: 12rem;
+    }
+  }
+}

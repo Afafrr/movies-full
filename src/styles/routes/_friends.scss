@@ -6,14 +6,26 @@
   margin: 1rem 0.5rem;
   form {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     gap: 0.5rem;
   }
   .accounts-list {
+    width: 100%;
+    max-width: 400px;
+    padding: 1rem 0rem;
     ul {
       list-style-type: none;
       margin: 0;
       padding: 0;
+    }
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  .friends-page {
+    form {
+      flex-direction: row;
     }
   }
 }
