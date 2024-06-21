@@ -7,27 +7,25 @@ import {
   startAt,
 } from "firebase/firestore";
 import { db, auth } from "./config/firebase";
+import { DocumentData } from "firebase/firestore";
 
-export const findAccountsByName = async (usernameQuery: string) => {
+export const findAccountsByName = async (username: string) => {
   const usersRef = collection(db, "Users");
-  const trimmedLowerUsername = usernameQuery.trim().toLowerCase();
-  const docArray: any = [];
-
+  const docArray: DocumentData[] = [];
+  const usernameLower = username.toLowerCase();
   //find accounts that contain written string
   const q = query(
     usersRef,
     orderBy("usernameLowercased"),
-    startAt(trimmedLowerUsername),
-    endAt(trimmedLowerUsername + "\uf8ff")
+    startAt(usernameLower),
+    endAt(usernameLower + "\uf8ff")
   );
-
   const querySnapshot = await getDocs(q);
 
   querySnapshot.forEach((doc) => {
-    console.log(doc.data());
-
-    if (doc.data().userEmail !== auth.currentUser?.email) {
-      docArray.push(doc.data());
+    const data = doc.data();
+    if (data.userEmail !== auth.currentUser?.email) {
+      docArray.push(data);
     }
   });
   return docArray;

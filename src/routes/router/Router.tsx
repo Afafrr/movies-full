@@ -34,23 +34,34 @@ export const Router = () => {
 
 export type IsLoadingContext = {
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  friendsRequests: {};
 };
+import { FirestoreProvider } from "../Friends/FirestoreProvider.tsx";
+import { auth } from "../../services/config/firebase.ts";
 
 export const Root = () => {
   const [isLoading, setIsLoading] = useState(false);
-  //root path is redirected to /dashboard
   const location = useLocation();
   const navigate = useNavigate();
+  const [currUserEmail, setCurrUserEmail] = useState();
+  //root path is redirected to /dashboard
+
   useEffect(() => {
     if (location.pathname === "/") {
       navigate("/dashboard");
     }
-  }, []);
-        
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        console.log(user?.email, "is logged");
+        setCurrUserEmail(user?.email);
+      }
+    });
+  }, [location.pathname]);
+
   return (
-    <>
+    <FirestoreProvider currUserEmail={currUserEmail}>
       <Navbar isLoading={isLoading} />
-      <Outlet context={{ setIsLoading }} />
-    </>
+      <Outlet context={{ setIsLoading, currUserEmail }} />
+    </FirestoreProvider>
   );
 };

@@ -1,15 +1,12 @@
 import { useState } from "react";
 import { findAccountsByName } from "../../services/searchForAccounts";
 import { FriendsListComponent } from "./FriendsListComponent";
-export type account = {
-  username: string;
-  usernameLowercased: string;
-  userEmail: string;
-};
+import { DocumentData } from "firebase/firestore";
+import { FriendsRequests } from "./FriendsRequests";
 
 export const Friends = () => {
   const [searchVal, setSearchVal] = useState("");
-  const [accountsList, setAccountsList] = useState<account[]>([]);
+  const [accountsList, setAccountsList] = useState<DocumentData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [noResults, setNoResults] = useState(false);
 
@@ -17,7 +14,6 @@ export const Friends = () => {
     setIsLoading(true);
     setNoResults(false);
     e.preventDefault();
-
     try {
       if (searchVal) {
         const accounts = await findAccountsByName(searchVal);
@@ -50,6 +46,11 @@ export const Friends = () => {
         </button>
       </form>
       <FriendsListComponent {...{ accountsList, isLoading, noResults }} />
+      <div>
+        <br />
+        <h4>FriendsList</h4>
+        <FriendsRequests />
+      </div>
     </div>
   );
 };

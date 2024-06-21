@@ -5,7 +5,7 @@ import { AuthError } from "../AuthError";
 import { AuthSuccess } from "../AuthSuccess";
 import { Link, useOutletContext } from "react-router-dom";
 import { useNavigate, Navigate } from "react-router-dom";
-import { UserService } from "../../services/register/userService";
+import { UserService } from "../../services/userService";
 import { IsLoadingContext } from "../../routes/router/Router";
 
 export const LoginPage = () => {
@@ -46,11 +46,6 @@ export const LoginPage = () => {
     try {
       const user = await signInWithPopup(auth, googleProvider);
       //if user does not have username redirect
-      const userService = new UserService();
-      const result = await userService.checkIfEmailHasUsername(user.user.email);
-      if (!result) {
-        return navigate("../register/username");
-      }
       setSuccess(true);
     } catch (err: any) {
       console.error(err);

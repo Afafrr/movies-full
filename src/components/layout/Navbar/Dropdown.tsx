@@ -2,8 +2,10 @@ import { useState, useEffect, useRef } from "react";
 import { auth } from "../../../services/config/firebase";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-
-export const Dropdown = ({ navBtns }: { navBtns: React.ReactNode }) => {
+type props = {
+  navBtns: React.ReactNode;
+};
+export const Dropdown = ({ navBtns }: props) => {
   const [visibility, setVisibility] = useState(false);
   const navigate = useNavigate();
 
@@ -37,7 +39,6 @@ export const Dropdown = ({ navBtns }: { navBtns: React.ReactNode }) => {
       console.error(err);
     }
   };
-
   return (
     <div className="dropdown" ref={menuRef}>
       <button onClick={toggleVisibility} className="btn btn-secondary">
@@ -53,7 +54,8 @@ export const Dropdown = ({ navBtns }: { navBtns: React.ReactNode }) => {
           </li>
           <li>
             <a href="/dashboard/friends">
-              <i className="bi bi-people-fill"></i> Friends
+              <i className="bi bi-people-fill"></i>
+              Friends
             </a>
           </li>
           <li>

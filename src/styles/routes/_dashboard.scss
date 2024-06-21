@@ -1,0 +1,20 @@
+.posts {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 500px;
+  .title {
+    text-align: center;
+  }
+  .comment {
+    margin: 0;
+  }
+  .alert {
+    text-align: center;
+  }
+  .list-group-item {
+    .date {
+      font-size: 0.7rem;
+    }
+  }
+}

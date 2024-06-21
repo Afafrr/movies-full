@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { UserService } from "../../services/register/userService";
+import { UserService } from "../../services/userService";
 import { AuthError } from "../AuthError";
 import { AuthSuccess } from "../AuthSuccess";
-import { Navigate } from "react-router-dom";
+import { Navigate, useOutletContext } from "react-router-dom";
 
 export const CreateUsername = () => {
   const [username, setUsername] = useState("");
   const [error, setError] = useState({ state: false, message: "" });
   const [success, setSuccess] = useState(false);
+  const { currUserEmail }: { currUserEmail: string } = useOutletContext();
 
   const createUsername = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,8 +19,7 @@ export const CreateUsername = () => {
 
     try {
       //method checks if username is unique and if same email adress already has username defined in db
-      await userService.createUserInDB(username);
-
+      await userService.createUserInDB(username, currUserEmail);
       setSuccess(true);
     } catch (error: any) {
       setError({ state: true, message: error.message });

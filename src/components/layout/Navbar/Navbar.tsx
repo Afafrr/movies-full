@@ -1,7 +1,6 @@
 import { Dropdown } from "./Dropdown";
-import { auth } from "../../../services/config/firebase";
 import { useLocation } from "react-router-dom";
-import { ReactNode } from "react";
+import { useEffect, useState } from "react";
 
 export const Navbar = ({ isLoading }: { isLoading: boolean }) => {
   let { pathname } = useLocation();
@@ -13,14 +12,11 @@ export const Navbar = ({ isLoading }: { isLoading: boolean }) => {
 
   const navBtns: React.ReactNode = (
     <div className="nav-btns-container">
+      <a className="btn" href="/dashboard/post">
+        Create Post
+      </a>
       <a className="btn" href="/dashboard/movies">
         Popular movies
-      </a>
-      <a className="btn" href="">
-        movies
-      </a>
-      <a className="btn" href="">
-        movies
       </a>
     </div>
   );
