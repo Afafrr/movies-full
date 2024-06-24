@@ -1,7 +1,0 @@
-
-
-1. login and register (2 methods, email and password or google account)
-2. redirection to login page if trying to access protected routes if not authenticated
-3. creating a username to db after registering
-4. every time user loggs in, system checks if user has a username 
-created in db if not redirect to createUsername.tsx  

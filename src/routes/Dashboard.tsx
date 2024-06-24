@@ -26,7 +26,6 @@ export const Dashboard = () => {
         try {
           const posts = await postService.getFriendsPosts();
           setPosts(posts);
-          console.log(posts);
         } catch (error) {}
       });
     }
@@ -36,19 +35,23 @@ export const Dashboard = () => {
   return (
     <div className="posts">
       <ul className="list-group list-group-flush">
-        {posts?.map((post) => {
-          return (
-            <li className="list-group-item" key={post.username}>
-              <p>
-                {post.username} rated movie as ({post.rating}/5)
-              </p>
-              <h4 className="title">{post.movieName}</h4>
-              <p className="comment">Comment:</p>
-              <span> {post.description}</span>
-              <p className="date">Date: {Date(post.createdAt).slice(0, 21)}</p>
-            </li>
-          );
-        })}
+        {posts ? (
+          posts?.map((post) => {
+            return (
+              <li className="list-group-item" key={post.username}>
+                <p>
+                  {post.username} rated movie as ({post.rating}/5)
+                </p>
+                <h4 className="title">{post.movieName}</h4>
+                <p className="comment">Comment:</p>
+                <span> {post.description}</span>
+                <p className="date">Date: {}</p>
+              </li>
+            );
+          })
+        ) : (
+          <p className="alert">No friends posts!</p>
+        )}
       </ul>
     </div>
   );

@@ -82,7 +82,7 @@ export class FriendsService {
     try {
       userRequest = {
         friendsList: arrayUnion({
-          username: this.friendEmail,
+          username: this.friendName,
           userEmail: this.friendEmail,
         }),
       };
