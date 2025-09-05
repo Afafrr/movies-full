@@ -7,7 +7,6 @@
 * [Setup](#setup)
 
 ## General info
-Project is in progress...
 	
 ## Technologies
 * React
